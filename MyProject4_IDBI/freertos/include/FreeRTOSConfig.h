@@ -18,6 +18,9 @@
 
 #define xPortPendSVHandler   PendSV_Handler
 #define xPortSysTickHandler  SysTick_Handler
+/*xPortSysTickHandler被映射到SysTick_Handler
+这意味着SysTick硬件中断会触发xTaskIncrementTick()的调用
+完整的调用链是：SysTick中断 → SysTick_Handler → xPortSysTickHandler → xTaskIncrementTick() */
 #define vPortSVCHandler      SVC_Handler
 
 

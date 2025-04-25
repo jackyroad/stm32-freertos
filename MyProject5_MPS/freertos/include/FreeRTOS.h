@@ -50,8 +50,8 @@ typedef struct tskTaskControlBlock
 	                                          /* 任务名称，字符串形式 */
 	char                    pcTaskName[ configMAX_TASK_NAME_LEN ];
 
-    TickType_t xTicksToDelay;
-    UBaseType_t			uxPriority;    
+    TickType_t      		xTicksToDelay;
+    UBaseType_t				uxPriority;    
 } tskTCB;
 typedef tskTCB TCB_t;
 

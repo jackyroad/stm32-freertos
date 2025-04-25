@@ -28,13 +28,15 @@ static UBaseType_t uxCriticalNesting = 0xaaaaaaaa;
 
 
 /* SysTick 配置寄存器 */
+/* SysTick 控制寄存器(使能定时器和中断) */
 #define portNVIC_SYSTICK_CTRL_REG			( * ( ( volatile uint32_t * ) 0xe000e010 ) )
+/* SysTick 重装载值寄存器(决定定时周期) */
 #define portNVIC_SYSTICK_LOAD_REG			( * ( ( volatile uint32_t * ) 0xe000e014 ) )
 
 #ifndef configSYSTICK_CLOCK_HZ
 	#define configSYSTICK_CLOCK_HZ configCPU_CLOCK_HZ
-	/* 确保SysTick的时钟与内核时钟一致 */
-	#define portNVIC_SYSTICK_CLK_BIT	( 1UL << 2UL )
+/* 确保SysTick的时钟与内核时钟一致 */
+#define portNVIC_SYSTICK_CLK_BIT (1UL << 2UL)
 #else
 	#define portNVIC_SYSTICK_CLK_BIT	( 0 )
 #endif
@@ -143,6 +145,7 @@ __asm void prvStartFirstTask( void )
 *                              SVC_Handler
 *************************************************************************
 */
+/* 完成了这个特权模式下的SVC中断后，PC指针就进入了任务代码，后续在任务代码里面的中断就是pendsv中断了 */
 __asm void vPortSVCHandler( void )
 {
     extern pxCurrentTCB;
@@ -210,6 +213,7 @@ __asm void xPortPendSVHandler( void )
 	ldmia r0!, {r4-r11}			/* 出栈 */
 	msr psp, r0
 	isb
+	/* 跳转到新任务执行 */
 	bx r14                      /* 异常发生时,R14中保存异常返回标志,包括返回后进入线程模式还是处理器模式、
                                    使用PSP堆栈指针还是MSP堆栈指针，当调用 bx r14指令后，硬件会知道要从异常返回，
                                    然后出栈，这个时候堆栈指针PSP已经指向了新任务堆栈的正确位置，
@@ -257,14 +261,16 @@ void vPortExitCritical( void )
 void vPortSetupTimerInterrupt( void )
 {
      /* 设置重装载寄存器的值 */
-    portNVIC_SYSTICK_LOAD_REG = ( configSYSTICK_CLOCK_HZ / configTICK_RATE_HZ ) - 1UL;
-    
-    /* 设置系统定时器的时钟等于内核时钟
-       使能SysTick 定时器中断
-       使能SysTick 定时器 */
-    portNVIC_SYSTICK_CTRL_REG = ( portNVIC_SYSTICK_CLK_BIT | 
-                                  portNVIC_SYSTICK_INT_BIT |
-                                  portNVIC_SYSTICK_ENABLE_BIT ); 
+	 /* 表示 SysTick 定时器中断的频率,100 Hz：1 tick = 10ms */
+	portNVIC_SYSTICK_LOAD_REG = ( configSYSTICK_CLOCK_HZ / configTICK_RATE_HZ ) - 1UL;
+
+	/* 设置系统定时器的时钟等于内核时钟
+	   使能SysTick 定时器中断
+	   使能SysTick 定时器 */
+
+	 portNVIC_SYSTICK_CTRL_REG = (portNVIC_SYSTICK_CLK_BIT |
+								  portNVIC_SYSTICK_INT_BIT |
+								  portNVIC_SYSTICK_ENABLE_BIT); 
 }
 
 /*

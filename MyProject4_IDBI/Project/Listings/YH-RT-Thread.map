@@ -353,15 +353,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-        56          0          0          0          0       1837   list.o
-       224         70          0         12       1680      12277   main.o
-       280         28          0          0          0       5991   port.o
+        56          0          0          0          0       1881   list.o
+       224         70          0         12       1680      12365   main.o
+       280         28          0          0          0       6059   port.o
         36          8        192          0       1024        800   startup_armcm3.o
         32         18          0          4          0        695   system_armcm3.o
-       554         76          0         16        100       5699   task.o
+       554         76          0         16        100       5771   task.o
 
     ----------------------------------------------------------------------
-      1184        200        224         32       2808      27299   Object Totals
+      1184        200        224         32       2808      27571   Object Totals
          0          0         32          0          0          0   (incl. Generated)
          2          0          0          0          4          0   (incl. Padding)
 
@@ -401,8 +401,8 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      1276        216        224         32       2808      26531   Grand Totals
-      1276        216        224         32       2808      26531   ELF Image Totals
+      1276        216        224         32       2808      26803   Grand Totals
+      1276        216        224         32       2808      26803   ELF Image Totals
       1276        216        224         32          0          0   ROM Totals
 
 ==============================================================================

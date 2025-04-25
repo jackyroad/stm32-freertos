@@ -3,13 +3,13 @@
         {
             "name": "Target 1",
             "includePath": [
-                "f:\\Generated_Files\\free_rtos\\Project\\MyProject4_IDBI\\User",
-                "f:\\Generated_Files\\free_rtos\\Project\\MyProject4_IDBI\\freertos\\include",
-                "f:\\Generated_Files\\free_rtos\\Project\\MyProject4_IDBI\\freertos\\portable\\RVDS\\ARM_CM3",
+                "f:\\Generated_Files\\free_rtos\\freertos_Project\\MyProject4_IDBI\\User",
+                "f:\\Generated_Files\\free_rtos\\freertos_Project\\MyProject4_IDBI\\freertos\\include",
+                "f:\\Generated_Files\\free_rtos\\freertos_Project\\MyProject4_IDBI\\freertos\\portable\\RVDS\\ARM_CM3",
                 "D:\\software\\Keil_v5\\ARM\\ARMCC\\include",
                 "D:\\software\\Keil_v5\\ARM\\ARMCC\\include\\rw",
-                "f:\\Generated_Files\\free_rtos\\Project\\MyProject4_IDBI\\freertos",
-                "f:\\Generated_Files\\free_rtos\\Project\\MyProject4_IDBI\\Doc"
+                "f:\\Generated_Files\\free_rtos\\freertos_Project\\MyProject4_IDBI\\freertos",
+                "f:\\Generated_Files\\free_rtos\\freertos_Project\\MyProject4_IDBI\\Doc"
             ],
             "defines": [
                 "__CC_ARM",
